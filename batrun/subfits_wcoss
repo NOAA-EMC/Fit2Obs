@@ -45,7 +45,7 @@ export ARCDIR=$ARCDIR
 export TMPDIR=$TMPDIR
 export fitdir=$fitdir
 
-export KEEPDATA=YES
+export KEEPDATA=NO  
 
 time $fitdir/runfits.wcoss $EXPNAM $CDATE $COMROT
 
