@@ -1,0 +1,5 @@
+set -euax
+
+cd $ptmp
+rm -rf archive.copy
+cp -r archive archive.copy

@@ -1,0 +1,15 @@
+set -euax
+
+name=$1           
+
+here=`pwd`
+cd $ptmp/fits/$name/web 
+rm -f $ptmp/$name.tar
+tar -cf $ptmp/$name.tar .    
+cd $ptmp
+
+scp $name.tar jwoolen@emcrzdm:/home/people/emc/www/htdocs/gc_wmb/woollen
+
+ssh jwoolen@emcrzdm ./jswmdx $name
+
+

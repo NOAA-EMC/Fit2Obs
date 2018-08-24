@@ -1,0 +1,4 @@
+469c469
+<       real(4)   gdata(nreg,nsub)
+---
+>       dimension gdata(nreg,nsub)

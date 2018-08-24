@@ -1,0 +1,227 @@
+Jack.Woollen@t10a2:/climate/save/Jack.Woollen/plotfits> grep GSCRIPTS scripts/*
+
+scripts/f00plots.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/f00plots.cdas:$grads -pbc "run $GSCRIPTS/horizb.gs $ts00 $te00 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f00plots.cdas:$grads -pbc "run $GSCRIPTS/horizrb.gs $ts00 $te00 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f00plots.cdas:$grads -pbc "run $GSCRIPTS/sfcmb.gs $ts00 $te00 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f00plots.cdas:$grads -pbc "run $GSCRIPTS/sfcrb.gs $ts00 $te00 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+
+scripts/f12plots.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/f12plots.cdas:$grads -pbc "run $GSCRIPTS/horiz12b.gs $ts12 $te12 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f12plots.cdas:$grads -pbc "run $GSCRIPTS/horizr12b.gs $ts12 $te12 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f12plots.cdas:$grads -pbc "run $GSCRIPTS/sfcm12b.gs $ts12 $te12 $pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+scripts/f12plots.cdas:$grads -pbc "run $GSCRIPTS/sfcr12b.gs $ts12 $te12 
+$pdir $minday $exp1dir $exp2dir $GSCRIPTS $exp1 $exp2 $namstr"
+
+scripts/horizab.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/horizab.cdas:$grads -pbc "run $GSCRIPTS/horizab.gs $ts00 $te00 $ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+scripts/horizab.cdas:$grads -pbc "run $GSCRIPTS/horizab.gs $ts00 $te00 $ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+scripts/horizab.cdas:$grads -pbc "run $GSCRIPTS/horizab.gs $ts00 $te00 $ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+
+scripts/horizrab.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/horizrab.cdas:$grads -pbc "run $GSCRIPTS/horizrab.gs $ts00 $te00 $ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+scripts/horizrab.cdas:$grads -pbc "run $GSCRIPTS/horizrab.gs $ts00 $te00 $ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+scripts/horizrab.cdas:$grads -pbc "run $GSCRIPTS/horizrab.gs $ts00 $te00 
+$ts12 $pdir $minday $regs $rege $expdir $GSCRIPTS $exp $namstr"
+
+scripts/sfcab.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/sfcab.cdas:$grads -pbc "run $GSCRIPTS/sfcmab.gs $ts00 $te00 $ts12 $pdir $minday $expdir $GSCRIPTS $exp $namstr"
+scripts/sfcab.cdas:$grads -pbc "run $GSCRIPTS/sfcrab.gs $ts00 $te00 $ts12 $pdir $minday $expdir $GSCRIPTS $exp $namstr"x
+
+scripts/timeacar.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacar.cdas:$grads -lbc "run $GSCRIPTS/acarw.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timeacar.cdas:$grads -lbc "run $GSCRIPTS/acart.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timeacar.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacar.new:$grads -lbc "run $GSCRIPTS/acarw.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timeacar.new:$grads -lbc "run $GSCRIPTS/acart.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timeacar.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacar.newb:$grads -lbc "run $GSCRIPTS/acartw.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+
+scripts/timeacft.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacft.cdas:$grads -lbc "run $GSCRIPTS/acftw.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timeacft.cdas:$grads -lbc "run $GSCRIPTS/acftt.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timeacft.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacft.new:$grads -lbc "run $GSCRIPTS/acftw.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timeacft.new:$grads -lbc "run $GSCRIPTS/acftt.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timeacft.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeacft.newb:$grads -lbc "run $GSCRIPTS/acfttw.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+
+scripts/timehgt.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timehgt.cdas:$grads -lbc "run $GSCRIPTS/hgttb.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timehgt.cdas:$grads -pbc "run $GSCRIPTS/hgttab.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timehgt.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timehgt.new:$grads -lbc "run $GSCRIPTS/hgttb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timehgt.new:$grads -pbc "run $GSCRIPTS/hgttab.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timehgt.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timehgt.newb:$grads -lbc "run $GSCRIPTS/hgttb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timehgt.newb:$grads -pbc "run $GSCRIPTS/hgttab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timemoi.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timemoi.cdas:$grads -lbc "run $GSCRIPTS/moitb.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timemoi.cdas:$grads -pbc "run $GSCRIPTS/moitab.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timemoi.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timemoi.new:$grads -lbc "run $GSCRIPTS/moitb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timemoi.new:$grads -pbc "run $GSCRIPTS/moitab.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timemoi.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timemoi.newb:$grads -lbc "run $GSCRIPTS/moitb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timemoi.newb:$grads -pbc "run $GSCRIPTS/moitab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timeout.newb:grads -pbc "run $GSCRIPTS/timeout.gs  $var $lev $type  $ntimes $sdate $edate  $nfcl $nexp $exps " ###>/dev/null
+
+scripts/timeps.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeps.cdas:$grads -lbc "run $GSCRIPTS/pstb.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timeps.cdas:$grads -pbc "run $GSCRIPTS/pstab.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+
+scripts/timeps.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeps.new:$grads -lbc "run $GSCRIPTS/pstb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timeps.new:$grads -pbc "run $GSCRIPTS/pstab.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+
+scripts/timeps.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeps.newb:$grads -lbc "run $GSCRIPTS/pstb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timeps.newb:$grads -pbc "run $GSCRIPTS/pstab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timesatw.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timesatw.newb:$grads -lbc "run $GSCRIPTS/satwtb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timesatw.newb:$grads -pbc "run $GSCRIPTS/satwtab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timeship.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timeship.newb:$grads -lbc "run $GSCRIPTS/shiptb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timeship.newb:$grads -pbc "run $GSCRIPTS/shiptab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timetmp.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timetmp.cdas:$grads -lbc "run $GSCRIPTS/temptb.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timetmp.cdas:$grads -pbc "run $GSCRIPTS/temptab.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+
+scripts/timetmp.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timetmp.new:$grads -lbc "run $GSCRIPTS/temptb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timetmp.new:$grads -pbc "run $GSCRIPTS/temptab.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+
+scripts/timetmp.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timetmp.newb:$grads -lbc "run $GSCRIPTS/temptb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timetmp.newb:$grads -pbc "run $GSCRIPTS/temptab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/timetqzw.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timetqzw.newb:grads -lbc "run $GSCRIPTS/raobdx.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2  $ctldir $namstr 700 650 $quan"
+scripts/timetqzw.newb:grads -pbc "run $GSCRIPTS/raobdx.allx.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2  $ctldir $namstr 650 700 $quan"
+
+scripts/timevrt.newb:grads -pbc "run $GSCRIPTS/timevrt.gs  $var $lev $type  $ntimes $sdate $edate  $nfcl $nexp $exps " ##>/dev/null
+
+scripts/timewnd.cdas:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timewnd.cdas:$grads -lbc "run $GSCRIPTS/windtb.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+scripts/timewnd.cdas:$grads -pbc "run $GSCRIPTS/windtab.cdas.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $ctldir $namstr"
+
+scripts/timewnd.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timewnd.new:$grads -lbc "run $GSCRIPTS/windtb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+scripts/timewnd.new:$grads -pbc "run $GSCRIPTS/windtab.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr"
+
+scripts/timewnd.newb:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/timewnd.newb:$grads -lbc "run $GSCRIPTS/windtb.newb.gs  $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 700 650"
+scripts/timewnd.newb:$grads -pbc "run $GSCRIPTS/windtab.newb.gs $ts00 $te00 $ts12 $te12 $pdir $GSCRIPTS $exp $mean $ctldir $namstr 650 700"
+
+scripts/vertplot.cdas:logofile=$GSCRIPTS/nws_logo.gif
+scripts/vertplot.cdas:$grads -lbc "run $GSCRIPTS/scalvb.cdas.gs $ts $te $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $idir1 $idir2 $namstr $ctldir"
+scripts/vertplot.cdas:$grads -lbc "run $GSCRIPTS/stratb.cdas.gs $ts $te $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $idir1 $idir2 $namstr $ctldir"
+scripts/vertplot.cdas:$grads -lbc "run $GSCRIPTS/scalvab.cdas.gs $ts $te $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $idir1 $idir2 $namstr"
+scripts/vertplot.cdas:$grads -lbc "run $GSCRIPTS/stratab.cdas.gs $ts $te $pdir $GSCRIPTS $exp1 $exp2 $fcs1 $fcs2 $idir1 $idir2 $namstr"
+
+scripts/vertplot.new:export logofile=${logofile:-$GSCRIPTS/nws_logo.gif}
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/scalvb_0z.gs $ts00 $te00 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/scalvb_12z.gs $ts12 $te12 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/stratb_0z.gs $ts00 $te00 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/stratb_12z.gs $ts12 $te12 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/scalvab_0z.gs $ts00 $te00 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/scalvab_12z.gs $ts12 $te12 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/stratab_0z.gs $ts00 $te00 $idir $pdir $GSCRIPTS $exp $namstr"
+scripts/vertplot.new:$grads -lbc "run $GSCRIPTS/stratab_12z.gs $ts12 $te12 $idir $pdir $GSCRIPTS $exp $namstr"
+Jack.Woollen@t10a2:/climate/save/Jack.Woollen/plotfits>
+
+
+
+
+
+List of scripts submitted by plotall.sh ------------------------------------
+
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/vertplot_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/vertplot_$sdir.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timeout.newb.out 
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timevrt.newb.out 
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/time${var}_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timeacar_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timeacft_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/time${var}_$sdir.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timeacar_$sdir.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/timeacft_$sdir.out  \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/f00plots_$exp2.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/f12plots_$exp2.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/horizab_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/horizrab_$exp.out \
+$SUBJOB -e $listvar -a $task  -q $cue -g $GROUP -p 1/1 -t 3:00:00 -o $PROUT/sfcab_$exp.out \
+
+
+
+
+List of scripts submitted by batchjob output filename from plotall.sh
+
+f00plots_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/f00plots.cdas
+f12plots_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/f12plots.cdas
+horizab_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/horizab.cdas
+horizab_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/horizab.cdas
+horizrab_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/horizrab.cdas
+horizrab_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/horizrab.cdas
+sfcab_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/sfcab.cdas
+sfcab_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/sfcab.cdas
+timeacar_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacar.newb
+timeacar_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacar.newb
+timeacar_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacar.cdas
+timeacar_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacar.cdas
+timeacar_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacar.cdas
+timeacft_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacft.newb
+timeacft_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacft.newb
+timeacft_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacft.cdas
+timeacft_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacft.cdas
+timeacft_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timeacft.cdas
+timehgt_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timehgt.newb
+timehgt_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timehgt.newb
+timehgt_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timehgt.cdas
+timehgt_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timehgt.cdas
+timehgt_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timehgt.cdas
+timemoi_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timemoi.newb
+timemoi_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timemoi.newb
+timemoi_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timemoi.cdas
+timemoi_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timemoi.cdas
+timemoi_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timemoi.cdas
+timeout.newb.out + /climate/save/Jack.Woollen/plotfits/scripts/timeout.newb
+timeps_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timeps.newb
+timeps_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timeps.newb
+timeps_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timeps.cdas
+timeps_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timeps.cdas
+timeps_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timeps.cdas
+timetmp_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timetmp.newb
+timetmp_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timetmp.newb
+timetmp_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timetmp.cdas
+timetmp_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timetmp.cdas
+timetmp_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timetmp.cdas
+timevrt.newb.out + /climate/save/Jack.Woollen/plotfits/scripts/timevrt.newb
+timewnd_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/timewnd.newb
+timewnd_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/timewnd.newb
+timewnd_f00af06.out + /climate/save/Jack.Woollen/plotfits/scripts/timewnd.cdas
+timewnd_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/timewnd.cdas
+timewnd_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/timewnd.cdas
+vertplot_archive.copy.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.new
+vertplot_archive.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.new
+vertplot_f00af06_0z.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.cdas
+vertplot_f00af06_12z.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.cdas
+vertplot_f12af36.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.cdas
+vertplot_f24af48.out + /climate/save/Jack.Woollen/plotfits/scripts/vertplot.cdas
+
+
+
+
+
+
+
+
+
+
+
+

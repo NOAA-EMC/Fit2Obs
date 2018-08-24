@@ -1,0 +1,9 @@
+set -euax
+
+file=/ptmpp1/Jack.Woollen/fits/fits.nemsiox/fit/archive/maps/time/timeout/archive.dieoff.raob
+
+ln -sf $file fort.11
+
+cwb rddie
+
+./rddie.x

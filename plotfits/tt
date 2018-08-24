@@ -1,0 +1,9 @@
+set -eua
+
+pro=/ptmpp1/Jack.Woollen/fits/fits.nemsiox/fit/archive.copy/prout
+
+for file in $(ls $pro/*); do
+
+echo $(basename $file) $(head -n1 $file)
+
+done

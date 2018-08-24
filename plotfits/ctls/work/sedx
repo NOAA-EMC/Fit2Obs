@@ -1,0 +1,20 @@
+set -xuea
+
+for file in ../ctlshold/*proto*; do
+
+cp $file tmpin 
+
+sed -e "s/tf   /tbias/"  tmpin >tmpout; mv tmpout tmpin 
+sed -e "s/to   /trmse/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/qf   /qbias/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/qo   /qrmse/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/zf   /zbias/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/zo   /zrmse/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/uf         /wbias      /"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/vf         /wrmse      /"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/pf   /pbias/"  tmpin >tmpout; mv tmpout tmpin
+sed -e "s/po   /prmse/"  tmpin >tmpout; mv tmpout tmpin
+cat tmpin; mv tmpin $(basename $file)
+done
+
+
