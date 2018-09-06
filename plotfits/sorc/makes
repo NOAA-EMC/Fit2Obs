@@ -1,0 +1,33 @@
+#!/bin/sh
+set -x
+
+FCMP=${1:-ifort}
+
+export LIBDIR=../../nwprod/lib
+export W3LIB=w3lib-2.0_4
+
+export LIBDIR=/nwprod/lib        
+export W3LIB=w3nco_4                 
+export FFLAGS="-O3 -g -traceback -mkl"
+
+rm -f *.x
+
+for file in havgfit sfcfit suruplot dieraob diesurf dieship dieacft dieacar; do
+#-------------------
+cat >makefile <<EOF
+FOPTS=${FFLAGS}
+FC=${FCMP}
+LIBS=-L${LIBDIR} -l${W3LIB}    
+SRCS=   opendian.f miscng.f ${file}.f        
+CMD=${file}.x
+\$(CMD): \$(SRCS)
+	 \$(FC) \$(FOPTS) \$(SRCS) \$(LIBS) -o \$(CMD)
+EOF
+#-------------------
+
+make
+
+rm makefile 
+done
+
+

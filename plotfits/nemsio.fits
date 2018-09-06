@@ -1,0 +1,77 @@
+#!/bin/ksh
+set -eaux
+
+sdate=20160220
+edate=20160221
+
+export DATEST=$sdate                       ;#verification starting date to show on map
+export DATEND=$edate                       ;#verification ending date to show on map
+
+export exp1=jetfits
+export exp2=jetfits.copy
+export exp3=
+export exp4=
+export exp5=
+export exp6=
+export exp7=
+
+ln -sf $ptmp/jetfits $ptmp/jetfits.copy
+
+export arch1=$ptmp
+export arch2=$ptmp
+export arch3=$ptmp
+export arch4=$ptmp
+export arch5=$ptmp
+export arch6=$ptmp
+export arch7=
+
+export fitzname=fits.jetfits 
+
+export scrdir=`pwd`
+export hredir=`pwd`
+
+batch=no                   ;#to run all jobs in batch mode
+
+### --------------------------------------------------------------
+###   make machine evironment 
+### --------------------------------------------------------------
+
+export NWPROD=/nwprod  ###$vsdbhome/nwprod
+export ptmp=/ptmpp1/$USER; mkdir -p $ptmp
+export FITS=$ptmp/fits; mkdir -p $FITS
+export DATA=$FITS/data
+
+which grads || exit 99; export GRADSBIN=`dirname $(which grads)`
+
+export tmpdir=$FITS/$fitzname                 ;#temporary directory for running verification
+rm -rf $tmpdir; mkdir -p $tmpdir ||exit
+
+export mapdir=$tmpdir/web                     ;#local directory to display plots and web templates
+mkdir -p $mapdir ; cd $mapdir ||exit
+tar -xf ${hredir}/fydb_exp_webpage.tar
+
+cd $tmpdir ||exit
+
+export SUBJOB=$hredir/sub_tide 
+export chost=$(hostname)                       ;#current computer host name
+export ACCOUNT=gm                         
+export logofile=/dev/null                 
+
+### -------------------------------------------------------------------------
+### these parameters control the forecasts and fit times in the timeout plots
+### -------------------------------------------------------------------------
+
+export oinc=6       # increment (hours) between observation verify times
+export finc=12      # increment (hours) between forecast lengths to plot
+export fmax=120     # max forecast length to show
+
+### --------------------------------------------------------------
+###   make fit-to-obs plots
+### --------------------------------------------------------------
+export endianlist="little little little little little little little" #endianess of the respective fits files
+export expnlist="$exp1  $exp2  $exp3  $exp4  $exp5  $exp6  $exp7"    #experiment names, only two allowed, fnl is operatinal GFS 
+export expdlist="$arch1 $arch2 $arch3 $arch4 $arch5 $arch6 $arch7"   #fcst data directories, can be different
+export complist="$chost $chost $chost $chost $chost"                 #computer names, can be different if passwordless ftp works 
+export cycle="00"                                                    #cycle to verify, only one cycle allowed
+export rundir=$tmpdir/fit
+${scrdir}/fit2obs.sh 1>${tmpdir}/fit2obs.out 2>&1 

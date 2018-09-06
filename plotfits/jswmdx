@@ -1,0 +1,13 @@
+set -eua
+
+name=$1
+
+dir=/home/people/emc/www/htdocs/gc_wmb/woollen; cd $dir
+
+idir=$dir/$name; rm -rf $idir; mkdir -p $idir
+
+cd $idir; tar -xf $dir/$name.tar; chmod -R a+rx *
+
+cd $dir; rm $name.tar
+
+echo $name >> allow.cfg; uniq allow.cfg >allow.tmp; mv allow.tmp allow.cfg
