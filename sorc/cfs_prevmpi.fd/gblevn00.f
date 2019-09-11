@@ -501,7 +501,7 @@ C  ----------------------------------------------
          ADPUPA_VIRT = .FALSE.
          nbax        = 1
          span        = 0
-         rsfc        = .true.
+         rsfc        = .false.
          fits        = .true.
 
 c  open and/or read parmfile with namelist override values
@@ -578,15 +578,17 @@ C  ------------------------------------------------------------------
 
          IF(DOFCST .OR. SOME_FCST .OR. DOANLS) then
 
-            CALL SELECTFILE(IUNITF,INPTYP)
-            rsfc=(rsfc.and.inptyp/=2)
-
             DO KBAK=1,NBAK
             if(kbak==myid+1) then
                IUNITF=KBAK+19
                idhr=tspan*(kbak-(nbak+1)/2)        
                CALL ADDATE(IDATEP,idhr,IDATEC)
                if(kbak==4) idatec=idatep
+               CALL SELECTFILE(IUNITF,INPTYP)
+               rsfc=(rsfc.and.inptyp/=2)
+               print*
+               print*,'jsw1',rsfc,inptyp
+               print*
                if(inptyp==1) CALL GBLEVN10(IUNITF,IDATEC,IM,JM,kbak)
                if(inptyp==2) CALL GBLEVN10nems(IUNITF,IDATEC,IM,JM,kbak)
                if(myid==0  ) call prttime('gblevn10')
@@ -594,6 +596,10 @@ C  ------------------------------------------------------------------
                if(myid==0  ) call prttime('gblevn12')
             endif
             lug=kbak+29
+               rsfc=.false.
+               print*
+               print*,'jsw2',rsfc,inptyp
+               print*
             if(rsfc) call readsf(lug,idatec,kbak) ! read surface fields
             ENDDO
            

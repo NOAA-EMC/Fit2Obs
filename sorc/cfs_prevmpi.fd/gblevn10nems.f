@@ -11,11 +11,11 @@ C***********************************************************************
       TYPE(SIGIO_HEAD) :: HEAD
       CHARACTER*20 CFILE
 
-      INTEGER IUNITF, INPTYP
+      INTEGER IUNITF(2), INPTYP
 
-      IUNIT = IUNITF
+      IUNIT = IUNITF(1)
       INPTYP = 1
-         WRITE(CFILE,'("fort.",I2.2)') IUNITF
+         WRITE(CFILE,'("fort.",2I4.2)') IUNITF
 
          CALL SIGIO_RROPEN(IUNIT,CFILE,IRET)
          print *,'HLW IRET=', IRET

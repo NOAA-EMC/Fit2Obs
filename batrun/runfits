@@ -2,10 +2,17 @@ set -euax
 
 exp=$1  CDATE=$2  COMROT=$3 
 
-export HOMEcfs=$fitdir/..
-export EXECcfs=$HOMEcfs/exec 
-export USHcfs=$HOMEcfs/ush 
-export NDATE=$EXECcfs/ndate
+if [[ $exp = CFS ]]; then
+ export HOMEf2o=$HOMEcfs/Fit2Obs
+ export EXECf2o=$HOMEcfs/exec 
+ export USHf2o=$HOMEf2o/ush 
+ export NDATE=$NDATE  ###$EXECf2o/ndate
+else
+ export HOMEf2o=$HOMEcfs/Fit2Obs
+ export EXECf2o=$HOMEf2o/exec 
+ export USHf2o=$HOMEf2o/ush 
+ export NDATE=$NDATE  ###$EXECf2o/ndate
+fi
 
 echo $ARCDIR                 ; mkdir -p $ARCDIR
 export FIT_DIR=$ARCDIR/fits  ; mkdir -p $FIT_DIR

@@ -16,18 +16,18 @@ rm -f $BASE*
 ln -sf $PRPI          fort.20
 ln -sf $BASE.a        fort.50
 ln -sf /dev/null      fort.51
-echo AIRCFT|$EXECcfs/rembfr 
+echo AIRCFT|$EXECf2o/rembfr 
 
 ln -sf $BASE.a        fort.20
 ln -sf $BASE.b        fort.50
 ln -sf /dev/null      fort.51
-echo AIRCAR|$EXECcfs/rembfr 
+echo AIRCAR|$EXECf2o/rembfr 
 
 #  split the aircraft profiles back into single levels
 
 ln -sf $PRPA   fort.20
 ln -sf $BASE.c fort.50
-$EXECcfs/splitac
+$EXECf2o/splitac
 
 cat $BASE.b $BASE.c > $BASE
 
