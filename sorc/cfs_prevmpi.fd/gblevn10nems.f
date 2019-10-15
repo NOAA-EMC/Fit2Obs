@@ -159,7 +159,7 @@ C  -------------------
 
       CALL NEMSIO_GETHEADVAR(gfile,'AK5',ak5,iret=iret)
       CALL NEMSIO_GETHEADVAR(gfile,'BK5',bk5,iret=iret)
-!!      if(iret/=0) call bort('ak5 bk5')
+!!    if(iret/=0) call bort('ak5 bk5')
       if (iret/=0) then
          write(6,*)'***WARNING*** unable to extract ak5,bk5 from nemsio'
          open(17,form='formatted')
@@ -170,7 +170,7 @@ C  -------------------
             kk = (kmax+1)-(k-1)
             ak5(kk) = ak5_in * 0.001
             bk5(kk) = bk5_in
-            write(6,*) kk,ak5(kk),bk5(kk)
+            !!write(6,*) kk,ak5(kk),bk5(kk)
          end do
          close(17)
       endif

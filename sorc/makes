@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -e
 
 mkdir -p ../exec
@@ -45,6 +46,19 @@ elif [ $plat = dell ] ; then
  module load sfcio/1.0.0
  module load nemsio/2.2.3
  module load sp/2.0.2
+elif [ $plat = hera ]; then
+ module load intel
+ module use /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
+ module load sigio/2.1.1
+ module load bufr/11.3.0
+ module load bacio/2.0.3
+ module load w3emc/2.3.1
+ module load w3nco/2.0.6
+ module load sfcio/1.1.1
+#module load nemsio/2.2.3
+ module load sp/2.0.2
+ module use /scratch1/NCEPDEV/global/gwv/l819/lib/modulefiles
+ module load nemsio-intel-sandybridge/2.2.3
 elif [ $plat = wcoss ] ; then
  module unload bufr w3nco
  module load bufr/v11.1.0
