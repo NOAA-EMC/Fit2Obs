@@ -49,7 +49,10 @@ yyyymmdd=$(echo $CDATE | cut -c1-8)
 
 if [ $RUN_ENVIR = prod -o $RUN_ENVIR = devpara ] ; then
   COMLIC=$COM_INA
+<<<<<<< HEAD
   COMLIF=$COM_INF
+=======
+>>>>>>> 2d9f267d2468482f14a3507f1ec6cac29e761d57
   export PRPI=$COMLIC/gdas.t${hh}z.prepbufr
   export PRPO=$COMLOX/gdas.t${hh}z.prepqa
   export PRPF=$COMLOX/gdas.t${hh}z.prepqf
@@ -117,7 +120,7 @@ if [ $RUN_ENVIR = prod -o $RUN_ENVIR = devpara ] ; then
   fh00=$fh;            [ $fh00 -lt 10 ] && fh00=0$fh00; [ $fh00 -lt 100 ] && fh00=0$fh00
   yyyymmdd=$(echo $FDATE|cut -c1-8); tzz=t$(echo $FDATE|cut -c9-10)z
   zz=$(echo $FDATE|cut -c9-10)
-  COMLICF=$COM_INF/gfs.$yyyymmdd/$zz
+  COMLICF=$COM_INF
   export sig1=$COMLICF/gfs.$tzz.atmf$fhm3.nemsio
   export sig2=$COMLICF/gfs.$tzz.atmf$fh00.nemsio
   export sig3=$COMLICF/gfs.$tzz.atmf$fhp3.nemsio
