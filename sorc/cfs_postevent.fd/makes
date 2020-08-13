@@ -43,6 +43,10 @@ elif [ $plat = dell  ]; then
  export LIBS="$W3EMC_LIB4 $W3NCO_LIB4 $BUFR_LIB4"
  export FLAGS="-O3 -g -traceback"
  export FCMP="mpiifort"
+elif [ $plat = orion  ]; then
+ export LIBS="$W3EMC_LIB4 $W3NCO_LIB4 $BUFR_LIB4"
+ export FLAGS="-O3 -g -traceback"
+ export FCMP="ifort"
 else
  echo "no recognized platform specified ($plat)"
  exit 99
