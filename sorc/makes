@@ -48,6 +48,7 @@ elif [ $plat = dell ] ; then
  module load sp/2.0.2
 elif [ $plat = hera ]; then
  module load intel
+ module load impi/2018.0.4
  module use /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
  module load sigio/2.1.1
  module load bufr/11.3.0
