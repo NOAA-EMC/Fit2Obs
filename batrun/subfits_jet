@@ -1,44 +1,42 @@
+#!/bin/bash
 set -euax
 
-EXPNAM=$1 CDATE=$2 COMROT=${3:-$STMP/$USER} ARCDIR=${4:-$COMROT/archive} TMPDIR=${5:-$STMP/$USER/tmpdir}
+EXPNAM=$1 CDATE=$2 ARCDIR=${ARCDIR:-$3} TMPDIR=${TMPDIR:-$4}
 
-ACCOUNT=${ACCOUNT:-CFS-T2O}
-CUE2RUN=${CUE2RUN:-dev}
-KEEPDATA=${KEEPDATA:-NO}
-PARTITION_BATCH=${PARTITION_BATCH:-xjet}
 
-vday=$(echo $CDATE | cut -c1-8)
-vcyc=$(echo $CDATE | cut -c9-10)
-
+set +x
 echo -------------------------------------------------------------------------------------------------------------------
-echo Starting the runfits for:
+echo Starting runfits: the following variables must be defined:
 echo -------------------------------------------------------------------------------------------------------------------
-echo "EXPNAM    " $EXPNAM       # argument 1 - experiment name    - required  (can be prod in which case COMROT is moot)
-echo "CDATE     " $CDATE        # argument 2 - date of validation - required 
-echo "COMROT    " $COMROT       # argument 3 - COMROT directory   - optional - defaults to /stmp/$USER
-echo "ARCDIR    " $ARCDIR       # argument 4 - ARCDIR directory   - optional - defaults to $COMROT/archive 
-echo "TMPDIR    " $TMPDIR       # argument 5 - TMPDIR directory   - optional - defaults to /stmp/$USER/tmpdir
-echo "ACCOUNT   " $ACCOUNT      # inherited  - project code       - required - defaults to nothing  
-echo "KEEPDATA  " $KEEPDATA     # inherited  - retain rundir      - optional - defaults to NO (rmdir)
+echo "EXPNAM    " $EXPNAM       # argument 1 - experiment name    - required
+echo "CDATE     " $CDATE        # argument 2 - date of validation - required
+echo "ARCDIR    " $ARCDIR       # argument 4 - ARCDIR directory   - optional - defaults to $COMROT/archive
+echo "TMPDIR    " $TMPDIR       # argument 5 - TMPDIR directory   - optional - defaults to /ptmp/$USER/tmpdir
+echo "ACCOUNT   " $ACCOUNT      # inherited  - project code       - required - defaults to nothing
+echo "COM_INA   " $COM_INA      # inheirited - project code       - required - defaults to nothing
+echo "COM_INF   " $COM_INF      # inheirited - project code       - required - defaults to nothing
+echo "OUTPUT_FILETYPE " $OUTPUT_FILETYPE    # inheirited - project code       - required - either nemsio or netcdf defaults to sigio
 echo -------------------------------------------------------------------------------------------------------------------
 
-fitdir=$(dirname $0); fitdir=$(cd $fitdir; pwd)
+fitdir=${fitdir:-$(dirname $0)}; fitdir=$(cd $fitdir; pwd)
 COMDAY=${COMDAY:-$COMROT/logs/$CDATE}
 
-set -euax          
+set -euax
 
 vrfytmpdiris=$TMPDIR
 unset TMPDIR
 
-cat<<EOF | sbatch
+cat<<eof | sbatch
 #!/bin/bash --login
-#SBATCH --job-name=FITS.$EXPNAM.$CDATE --time=20:00
-#SBATCH --nodes=1 --ntasks=3
-#SBATCH --output=$COMDAY/FITS.$EXPNAM.$CDATE.$$
+#SBATCH --job-name=FITS.$EXPNAM.$CDATE --time=00:20:00
+#SBATCH --nodes=3 --ntasks-per-node=1
+#SBATCH --output=$COMDAY/jet.fit2obs.log.$$
 #SBATCH --account=$ACCOUNT
+#SBATCH --qos=${CUE2RUN:-batch}
 #SBATCH --partition=$PARTITION_BATCH
 
-#!/usr/bin/env bash
+
+
 set -euax
 
 set +x
@@ -60,20 +58,14 @@ export CDATE=$CDATE
 export EXP=$EXPNAM
 export COMPONENT=${COMPONENT:-atmos}
 export COM_IN=$ROTDIR
-export COM_INA=$ROTDIR/gdas.$vday/$vcyc/$COMPONENT
-export COM_INF='$ROTDIR/vrfyarch/gfs.\$fdy/\$fzz'
 export KEEPDATA=$KEEPDATA
-
-export RUN_ENVIR=netcdf     
-export CONVNETC=YES        
-export ACPROFit=YES  
 
 export fitdir=$fitdir
 export ARCDIR=$ARCDIR
 export TMPDIR=$vrfytmpdiris
-export PRVT=${PRVT:-$HOMEgfs/fix/fix_gsi/prepobs_errtable.global}
-export HYBLEVS=${HYBLEVS:-$HOMEgfs/fix/fix_am/global_hyblev.l65.txt}
+export ACPROFit=${ACPROFit:-YES}
+export NEMS=${NEMS:-YES}
 
-time $fitdir/runfits $EXPNAM $CDATE $COMROT
+time $fitdir/runfits $EXPNAM $CDATE
 
-EOF
+eof
