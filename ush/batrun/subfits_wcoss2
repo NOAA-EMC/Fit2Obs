@@ -4,32 +4,33 @@ set -eua
 EXPNAM=$1 CDATE=$2 ARCDIR=${ARCDIR:-$3} TMPDIR=${TMPDIR:-$4}
 
 FITDIR=$(dirname $0); fitdir=$(cd $FITDIR/../batrun; pwd)
+LOGDIR=${LOGDIR:-$COMROT/logs/$CDATE}
 
 set +x
 echo -------------------------------------------------------------------------------------------------------------------
 echo Starting runfits: the following variables must be defined:
 echo -------------------------------------------------------------------------------------------------------------------
-echo "EXPNAM    " $EXPNAM       # argument 1 - experiment name    - required  
-echo "CDATE     " $CDATE        # argument 2 - date of validation - required
-echo "ARCDIR    " $ARCDIR       # argument 4 - ARCDIR directory   - optional - defaults to $COMROT/archive
-echo "TMPDIR    " $TMPDIR       # argument 5 - TMPDIR directory   - optional - defaults to /ptmp/$USER/tmpdir
-echo "COMDAY    " $COMDAY       # inheirited - dayfile directory  - optional - defaults to $COMROT     
-echo "FITDIR    " $FITDIR       # inheirited - Fit2obs batrun dir - optional - defaults to $(dirname $0)
-echo "ACCOUNT   " $ACCOUNT      # inheirited - project code       - required - defaults to nothing
-echo "COM_INA   " $COM_INA      # inheirited - project code       - required - defaults to nothing
-echo "COM_INF   " $COM_INF      # inheirited - project code       - required - defaults to nothing
-echo "OUTPUT_FILETYPE " $OUTPUT_FILETYPE    # inheirited - project code       - required - either nemsio or netcdf defaults to sigio
+echo "EXPNAM           " $EXPNAM            # argument 1 - experiment name    - required
+echo "CDATE            " $CDATE             # argument 2 - date of validation - required
+echo "ARCDIR           " $ARCDIR            # argument 4 - ARCDIR directory   - optional - defaults to $COMROT/archive
+echo "TMPDIR           " $TMPDIR            # argument 5 - TMPDIR directory   - optional - defaults to /ptmp/$USER/tmpdir
+echo "LOGDIR           " $LOGDIR            # inheirited - log directory      - optional - defaults to $COMROT/logs/$CDATE
+echo "FITDIR           " $FITDIR            # inheirited - Fit2obs batrun dir - optional - defaults to $(dirname $0)
+echo "ACCOUNT          " $ACCOUNT           # inheirited - project code       - required - defaults to nothing
+echo "COMIN_ANALYSIS   " $COMIN_ANALYSIS    # inheirited - analysis input     - required - defaults to nothing
+echo "COMIN_HISTORY    " $COMIN_HISTORY     # inheirited - forecast input     - required - defaults to nothing
+echo "OUTPUT_FILETYPE  " $OUTPUT_FILETYPE   # inheirited - project code       - required - either nemsio or netcdf defaults to sigio
 echo -------------------------------------------------------------------------------------------------------------------
 set -x
 
-mkdir -p $COMDAY $TMPDIR
+mkdir -p $LOGDIR $TMPDIR
 
 nproc=3
 
 cat<<eof | qsub -
 #!/bin/bash
 #PBS -N FITS.$EXPNAM.$CDATE
-#PBS -o $COMDAY/FITS.$EXPNAM.$CDATE.$$
+#PBS -o $LOGDIR/FITS.$EXPNAM.$CDATE.$$
 #PBS -A $ACCOUNT
 #PBS -l select=1:ncpus=$nproc:mpiprocs=$nproc:mem=200GB
 #PBS -l walltime=${TIMELIM:-02:00:00}
@@ -60,9 +61,9 @@ set -x
 
 set +ux
 echo
-echo COM_PRP='$COM_PRP'
-echo COM_INA='$COM_INA'
-echo COM_INF='$COM_INF'
+echo COMIN_OBS='$COMIN_OBS'
+echo COMIN_ANALYSIS='$COMIN_ANALYSIS'
+echo COMIN_HISTORY='$COMIN_HISTORY'
 echo
 set -ux
 
