@@ -50,7 +50,8 @@ hh=$(echo $CDATE | cut -c9-10)
 cyc=$hh
 
 set +u
-COMIN_OBS=${COMIN_OBS:-$COMIN_ANALYSIS}
+eval COMIN_OBS=${COMIN_OBS:-$COMIN_ANALYSIS}
+eval COMIN_ANALYSIS=${COMIN_ANALYSIS}
 set -u
 
 if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
@@ -115,6 +116,7 @@ do
 FDATE=$($NDATE -$fh $CDATE)
 fdy=$(echo $FDATE|cut -c 1-8)
 fzz=$(echo $FDATE|cut -c 9-10)
+eval COMIN_HISTORY=${COMIN_HISTORY}
 
 if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fhm3=$((fh-$tspan)); [ $fhm3 -lt 10 ] && fhm3=0$fhm3; [ $fhm3 -lt 100 ] && fhm3=0$fhm3
