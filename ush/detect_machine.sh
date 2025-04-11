@@ -18,11 +18,6 @@ case $(hostname -f) in
   hfe1[0-2]) MACHINE_ID=hera ;; ### hera10-12
   hecflow01) MACHINE_ID=hera ;; ### heraecflow01
 
-  s4-submit.ssec.wisc.edu) MACHINE_ID=s4 ;; ### s4
-
-  fe[1-8]) MACHINE_ID=jet ;; ### jet01-8
-  tfe[12]) MACHINE_ID=jet ;; ### tjet1-2
-
   Orion-login-[1-4].HPC.MsState.Edu) MACHINE_ID=orion ;; ### orion1-4
 
   [Hh]ercules-login-[1-4].[Hh][Pp][Cc].[Mm]s[Ss]tate.[Ee]du) MACHINE_ID=hercules ;; ### hercules1-4
