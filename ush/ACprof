@@ -2,7 +2,9 @@
 set -eua
 
 COMROT=$(dirname $PRPI)            
-COMPRP=$DATA/ACprofwork; mkdir -p $COMPRP; cd $COMPRP
+
+mkdir -p $DATA/ACprofwork
+cd $DATA/ACprofwork
 
 #  locate the base files 
 

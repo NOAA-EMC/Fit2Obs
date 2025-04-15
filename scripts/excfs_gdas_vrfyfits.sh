@@ -23,7 +23,7 @@ export BUFRPOSTSH=${BUFRPOSTSH:-$USHcfs/${cfsp}bufr_post.sh}
 export FITSSH=${FITSSH:-$USHcfs/${cfsd}fits.sh}
 export HORZSH=${HORZSH:-$USHcfs/${cfsd}horizn.sh}
 export CNVDIAGEXEC=${CNVDIAGEXEC:-$EXECcfs/${cfsp}post_convdiag.x}
-export COMLOX=${COMLOX:-$DATA}   
+export COMOUT_FITX=${COMOUT_FITX:-$DATA}
 export COMOUT=${COMOUT:-$DATA}   
 export SAVEPREP=${SAVEPREP:-NO}
 
@@ -50,27 +50,26 @@ hh=$(echo $CDATE | cut -c9-10)
 cyc=$hh
 
 set +u
-eval COMLIC=$COM_INA
-eval COMPRP=$COM_PRP
-COMPRP=${COMPRP:-$COMLIC}
+eval COMIN_OBS=${COMIN_OBS:-$COMIN_ANALYSIS}
+eval COMIN_ANALYSIS=${COMIN_ANALYSIS}
 set -u
 
 if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   [[ $OUTPUT_FILETYPE = nemsio ]] && suffix=nemsio || suffix=nc
-  export PRPI=$COMPRP/gdas.t${hh}z.prepbufr
-  export PRPO=$COMLOX/gdas.t${hh}z.prepqa
-  export PRPF=$COMLOX/gdas.t${hh}z.prepqf
-  export sig1=$COMLIC/gdas.t${hh}z.atmanl.$suffix
-  export sfc1=$COMLIC/gdas.t${hh}z.atmanl.$suffix
-  export CNVS=$COMLIC/gdas.t${hh}z.cnvstat
+  export PRPI=$COMIN_OBS/gdas.t${hh}z.prepbufr
+  export PRPO=$COMOUT_FITX/gdas.t${hh}z.prepqa
+  export PRPF=$COMOUT_FITX/gdas.t${hh}z.prepqf
+  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.atmanl.$suffix
+  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.atmanl.$suffix
+  export CNVS=$COMIN_ANALYSIS/gdas.t${hh}z.cnvstat
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   tzz=t${hh}z
-  export PRPI=$COMLIC/cdas1.$tzz.prepbufr       
-  export PRPO=$COMOUT/cdas1.$tzz.prepqa           
-  export PRPF=$COMLOX/cdas1.$tzz.prepqf
-  export sig1=$COMLIC/cdas1.$tzz.sanl               
-  export sfc1=$COMLIC/cdas1.$tzz.sfcanl 
-  export CNVS=$COMLIC/cdas1.$tzz.cnvstat 
+  export PRPI=$COMIN_OBS/cdas1.$tzz.prepbufr
+  export PRPO=$COMOUT/cdas1.$tzz.prepqa
+  export PRPF=$COMOUT_FITX/cdas1.$tzz.prepqf
+  export sig1=$COMIN_ANALYSIS/cdas1.$tzz.sanl
+  export sfc1=$COMIN_ANALYSIS/cdas1.$tzz.sfcanl
+  export CNVS=$COMIN_ANALYSIS/cdas1.$tzz.cnvstat
 else 
   echo $OUTPUT_FILETYPE = unknown OUTPUT_FILETYPE; exit 999
 fi
@@ -83,8 +82,8 @@ $BUFRPOSTSH $sig1 $CNVS $PRPI $PRPO $CDATE
 [ $SAVEPREP = YES          ] && cp $PRPO $ARCDIR/$(basename $PRPO).06.00
 [ $SAVEPREP = YES          ] && cp $PRPI $ARCDIR
 
-$FITSSH     $CDATE $PRPO $COMLOX $DATA 06 00           
-$HORZSH     $CDATE $PRPO $COMLOX $DATA anl 2> horizout
+$FITSSH     $CDATE $PRPO $COMOUT_FITX $DATA 06 00
+$HORZSH     $CDATE $PRPO $COMOUT_FITX $DATA anl 2> horizout
 
 #################################################################
 # make prepqf file containing forecasts
@@ -117,7 +116,7 @@ do
 FDATE=$($NDATE -$fh $CDATE)
 fdy=$(echo $FDATE|cut -c 1-8)
 fzz=$(echo $FDATE|cut -c 9-10)
-eval COMLICF=$COM_INF
+eval COMIN_HISTORY=${COMIN_HISTORY}
 
 if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fhm3=$((fh-$tspan)); [ $fhm3 -lt 10 ] && fhm3=0$fhm3; [ $fhm3 -lt 100 ] && fhm3=0$fhm3
@@ -125,22 +124,22 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fh00=$fh;            [ $fh00 -lt 10 ] && fh00=0$fh00; [ $fh00 -lt 100 ] && fh00=0$fh00
   tzz=t$(echo $FDATE|cut -c9-10)z
   [[ $OUTPUT_FILETYPE = nemsio ]] && suffix=nemsio || suffix=nc
-  export sig1=$COMLICF/gfs.$tzz.atmf$fhm3.$suffix  
-  export sig2=$COMLICF/gfs.$tzz.atmf$fh00.$suffix
-  export sig3=$COMLICF/gfs.$tzz.atmf$fhp3.$suffix
-  export sfc1=$COMLICF/gfs.$tzz.atmf$fhm3.$suffix
-  export sfc2=$COMLICF/gfs.$tzz.atmf$fh00.$suffix
-  export sfc3=$COMLICF/gfs.$tzz.atmf$fhp3.$suffix
+  export sig1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
+  export sig2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
+  export sig3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
+  export sfc1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
+  export sfc2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
+  export sfc3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   CDAM3=$($NDATE -$tspan  $CDATE)
   CDAP3=$($NDATE +$tspan  $CDATE)
-  export sig1=$COMLICF/sigf${CDAM3}.01.$FDATE
-  export sig2=$COMLICF/sigf${CDATE}.01.$FDATE
-  export sig3=$COMLICF/sigf${CDAP3}.01.$FDATE
-  export sfc1=$COMLICF/sfcf${CDAM3}.01.$FDATE
-  export sfc2=$COMLICF/sfcf${CDATE}.01.$FDATE
-  export sfc3=$COMLICF/sfcf${CDAP3}.01.$FDATE
-else 
+  export sig1=$COMIN_HISTORY/sigf${CDAM3}.01.$FDATE
+  export sig2=$COMIN_HISTORY/sigf${CDATE}.01.$FDATE
+  export sig3=$COMIN_HISTORY/sigf${CDAP3}.01.$FDATE
+  export sfc1=$COMIN_HISTORY/sfcf${CDAM3}.01.$FDATE
+  export sfc2=$COMIN_HISTORY/sfcf${CDATE}.01.$FDATE
+  export sfc3=$COMIN_HISTORY/sfcf${CDAP3}.01.$FDATE
+else
   echo $OUTPUT_FILETYPE = unknown OUTPUT_FILETYPE; exit 999
 fi
 
@@ -159,9 +158,9 @@ done # endi of inner loop over two forecast times
 if [ $fh1 != xx -o $fh2 != xx ] ; then
  [ "$CHGRP_RSTPROD" = 'YES' ] && chgrp rstprod $PRPF && chmod 640 $PRPF
  [ $SAVEPREP = YES          ] && cp $PRPF $ARCDIR/$(basename $PRPO).$fh1.$fh2
- $FITSSH $CDATE $PRPF $COMLOX $DATA $fh1 $fh2 
- [ $hh = 00 -a $fh1 = 24 ] &&  $HORZSH $CDATE $PRPF $COMLOX $DATA fcs 2> horizout
- [ $hh = 12 -a $fh1 = 12 ] &&  $HORZSH $CDATE $PRPF $COMLOX $DATA fcs 2> horizout
+ $FITSSH $CDATE $PRPF $COMOUT_FITX $DATA $fh1 $fh2
+ [ $hh = 00 -a $fh1 = 24 ] &&  $HORZSH $CDATE $PRPF $COMOUT_FITX $DATA fcs 2> horizout
+ [ $hh = 12 -a $fh1 = 12 ] &&  $HORZSH $CDATE $PRPF $COMOUT_FITX $DATA fcs 2> horizout
 fi
 
 done # end of outer loop over multiple forecast times
@@ -172,23 +171,23 @@ done # end of outer loop over multiple forecast times
 
 set +e
 
-rm -f $COMLOX/fxx*
+rm -f $COMOUT_FITX/fxx*
 
 mkdir -p $FIT_DIR
-cp $COMLOX/f*.raob.$CDATE  $FIT_DIR 
-cp $COMLOX/f*.acft.$CDATE  $FIT_DIR 
-cp $COMLOX/f*.acar.$CDATE  $FIT_DIR 
-cp $COMLOX/f*.surf.$CDATE  $FIT_DIR 
-cp $COMLOX/f*.sfc.$CDATE   $FIT_DIR 
+cp $COMOUT_FITX/f*.raob.$CDATE  $FIT_DIR
+cp $COMOUT_FITX/f*.acft.$CDATE  $FIT_DIR
+cp $COMOUT_FITX/f*.acar.$CDATE  $FIT_DIR
+cp $COMOUT_FITX/f*.surf.$CDATE  $FIT_DIR
+cp $COMOUT_FITX/f*.sfc.$CDATE   $FIT_DIR
 
 for typ in anl fcs
 do
 mkdir -p $HORZ_DIR/$typ   
-cp -p $COMLOX/adpupa.mand.$typ.$CDATE  $HORZ_DIR/$typ/adpupa.mand.$CDATE 
-cp -p $COMLOX/adpsfc.$typ.$CDATE       $HORZ_DIR/$typ/adpsfc.$CDATE      
-cp -p $COMLOX/sfcshp.$typ.$CDATE       $HORZ_DIR/$typ/sfcshp.$CDATE      
-cp -p $COMLOX/aircar.$typ.$CDATE       $HORZ_DIR/$typ/aircar.$CDATE      
-cp -p $COMLOX/aircft.$typ.$CDATE       $HORZ_DIR/$typ/aircft.$CDATE      
+cp -p $COMOUT_FITX/adpupa.mand.$typ.$CDATE  $HORZ_DIR/$typ/adpupa.mand.$CDATE
+cp -p $COMOUT_FITX/adpsfc.$typ.$CDATE       $HORZ_DIR/$typ/adpsfc.$CDATE
+cp -p $COMOUT_FITX/sfcshp.$typ.$CDATE       $HORZ_DIR/$typ/sfcshp.$CDATE
+cp -p $COMOUT_FITX/aircar.$typ.$CDATE       $HORZ_DIR/$typ/aircar.$CDATE
+cp -p $COMOUT_FITX/aircft.$typ.$CDATE       $HORZ_DIR/$typ/aircft.$CDATE
 done
 
 ################## END OF SCRIPT #######################
