@@ -116,7 +116,7 @@ do
 FDATE=$($NDATE -$fh $CDATE)
 fdy=$(echo $FDATE|cut -c 1-8)
 fzz=$(echo $FDATE|cut -c 9-10)
-eval COMIN_HISTORY=${COMIN_HISTORY}
+export COMIN_HISTORY="${COM_VRFYARCH:-${ROTDIR}}/gfs.${fdy}/${fzz}"
 
 if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fhm3=$((fh-$tspan)); [ $fhm3 -lt 10 ] && fhm3=0$fhm3; [ $fhm3 -lt 100 ] && fhm3=0$fhm3
