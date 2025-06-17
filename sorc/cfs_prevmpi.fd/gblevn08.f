@@ -95,7 +95,7 @@ C$$$
 
       COMMON /GBEVAA/ SID,OBS(15,255),QMS(12,255),BAK(12,255),XOB,
      $ YOB,DHR,TYP,NLEV
-      COMMON /GBEVBB/ PVCD,VTCD
+      COMMON /GBEVBB/ IPVCD,IVTCD
       COMMON /GBEVCC/ DOVTMP,DOFCST,SOME_FCST,DOBERR,FCST,VIRT,
      $ QTOP_REJ,SATMQC,ADPUPA_VIRT
 
@@ -159,7 +159,7 @@ C  ---------------------------------------------------------------------
                IF(TOB.LT.BMISS) THEN
                   BAKV(1,L) = TOB
                   BAKV(2,L) = TQM(L)
-                  BAKV(3,L) = VTCD
+                  BAKV(3,L) = IVTCD
                   BAKV(4,L) = 3
                   EVNV = .TRUE.
                   CYCLE
@@ -179,7 +179,7 @@ cdak $ print *, '&&& bad QM fails sanity check'
             QOB = QS(TDO+273.16,POB)
             BAKQ(1,L) = QOB*1E6
             BAKQ(2,L) = QQM(L)  ! Moist qm same as before for re-calc. q
-            BAKQ(3,L) = VTCD
+            BAKQ(3,L) = IVTCD
             BAKQ(4,L) = 0       ! Re-calc. q gets unique reason code 0
             EVNQ = .TRUE.
 C  If message type ADPUPA, test this level to see if at or above trop
@@ -191,7 +191,7 @@ C   q calculation)
      $       ((CAT.EQ.5 .AND. POB.LT.500.) .OR. POB.LT. 80. .OR. TROP))
             IF(DOVTMP .AND. .NOT.TROP) THEN
                BAKV(1,L) = (TOB+273.16)*(1.+.61*QOB)-273.16
-               BAKV(3,L) = VTCD
+               BAKV(3,L) = IVTCD
                IF(SUBSET.EQ.'ADPUPA  ') THEN
 C  Message type ADPUPA comes here
                   IF((QQM(L).LT.4.OR.QQM(L).EQ.9.OR.QQM(L).EQ.15)

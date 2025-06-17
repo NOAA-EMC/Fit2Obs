@@ -446,7 +446,7 @@ C$$$
 
       COMMON /GBEVAA/ SID,OBS(15,255),QMS(12,255),BAK(12,255),XOB,
      $ YOB,DHR,TYP,NLEV
-      COMMON /GBEVBB/ PVCD,VTCD
+      COMMON /GBEVBB/ IPVCD,IVTCD
       COMMON /GBEVCC/ DOVTMP,DOFCST,SOME_FCST,DOBERR,FCST,VIRT,
      $ QTOP_REJ,SATMQC,ADPUPA_VIRT
       COMMON /GBEVDD/ ERRS(300,33,6)
@@ -658,8 +658,8 @@ C----------------------------------------------------------------------
 C  OBTAIN NECESSARY PROGRAM CODES (ONLY USED IN PREVENTS MODE)
 C  -----------------------------------------------------------
 
-         CALL UFBQCD(IUNITP,'PREVENT',PVCD)
-         CALL UFBQCD(IUNITP,'VIRTMP ',VTCD)
+         CALL UFBQCD(IUNITP,'PREVENT',IPVCD)
+         CALL UFBQCD(IUNITP,'VIRTMP ',IVTCD)
 
       IF(.NOT.DOANLS)  THEN
 
@@ -824,6 +824,7 @@ c-----------------------------------------------------------------------
 
       use gblevn_module
       use readsf_module
+      use sp_mod, only: splat
       use sfcio_module, only: sfcio_intkind,sfcio_head,sfcio_data,
      .                        sfcio_srohdc,sfcio_axdata
 

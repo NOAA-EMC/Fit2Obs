@@ -50,6 +50,7 @@ c------------------------------------------------------------------
       subroutine suterps
 
       USE GBLEVN_MODULE
+      USE SP_MOD, ONLY: SPLAT
 
       real slat(jmax),wlat(jmax)
 

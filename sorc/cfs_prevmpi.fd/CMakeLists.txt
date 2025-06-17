@@ -19,7 +19,7 @@ add_executable(cfs_prevmpi.x ${fortran_src})
 target_link_libraries(cfs_prevmpi.x PRIVATE bacio::bacio_4
                                             w3emc::w3emc_4
                                             bufr::bufr_4
-                                            sp::sp_4
+                                            ip::ip_4
                                             sigio::sigio
                                             sfcio::sfcio
                                             nemsio::nemsio)

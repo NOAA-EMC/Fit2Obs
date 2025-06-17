@@ -15,7 +15,7 @@ C***********************************************************************
 
       COMMON /GBEVAA/ SID,OBS(15,255),QMS(12,255),BAK(12,255),XOB,
      $ YOB,DHR,TYP,NLEV
-      COMMON /GBEVBB/ PVCD,VTCD
+      COMMON /GBEVBB/ IPVCD,IVTCD
       COMMON /GBEVCC/ DOVTMP,DOFCST,SOME_FCST,DOBERR,FCST,VIRT,
      $ QTOP_REJ,SATMQC,ADPUPA_VIRT
       COMMON /GBEVEE/PSG01,ZSG01,TG01(500),UG01(500),VG01(500),
@@ -149,7 +149,7 @@ C  -------------------------------------------------------------------
                REJP_PS = .TRUE.
                PEV(1,L) = POB
                PEV(2,L) = REJ
-               PEV(3,L) = PVCD
+               PEV(3,L) = IPVCD
                PEV(4,L) = RCD
                MAXPEV = L
             ENDIF
@@ -216,7 +216,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1401) STNID,NINT(TYP),YOB,XOB,PQM
                ELSE
                   PEV(1,L) = POB
                   PEV(2,L) = REJ
-                  PEV(3,L) = PVCD
+                  PEV(3,L) = IPVCD
                   PEV(4,L) = RCD
                   MAXPEV = L
                ENDIF
@@ -304,7 +304,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1402) STNID,NINT(TYP),YOB,XOB,TQM
                ELSE
                   TEV(1,L) = TOB
                   TEV(2,L) = REJ
-                  TEV(3,L) = PVCD
+                  TEV(3,L) = IPVCD
                   TEV(4,L) = RCD
                   MAXTEV = L
                ENDIF
@@ -409,7 +409,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1403) STNID,NINT(TYP),YOB,XOB,QQM
                ELSE
                   QEV(1,L) = QOB
                   QEV(2,L) = REJ
-                  QEV(3,L) = PVCD
+                  QEV(3,L) = IPVCD
                   QEV(4,L) = RCD
                   MAXQEV = L
                ENDIF
@@ -469,7 +469,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1404) STNID,NINT(TYP),YOB,XOB,WQM
                   WEV(1,L) = UOB
                   WEV(2,L) = VOB
                   WEV(3,L) = REJ
-                  WEV(4,L) = PVCD
+                  WEV(4,L) = IPVCD
                   WEV(5,L) = RCD
                   MAXWEV = L
                ENDIF
@@ -504,7 +504,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1405) STNID,NINT(TYP),YOB,XOB,PWQ
                ELSE
                   PWV(1,L) = PWO
                   PWV(2,L) = 9
-                  PWV(3,L) = PVCD
+                  PWV(3,L) = IPVCD
                   PWV(4,L) = 3
                   MAXPWV = L
                ENDIF
@@ -539,7 +539,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1406) STNID,NINT(TYP),YOB,XOB,PW1Q
                ELSE
                   PW1V(1,L) = PW1O
                   PW1V(2,L) = 9
-                  PW1V(3,L) = PVCD
+                  PW1V(3,L) = IPVCD
                   PW1V(4,L) = 3
                   MAXPW1V = L
                ENDIF
@@ -574,7 +574,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1407) STNID,NINT(TYP),YOB,XOB,PW2Q
                ELSE
                   PW2V(1,L) = PW2O
                   PW2V(2,L) = 9
-                  PW2V(3,L) = PVCD
+                  PW2V(3,L) = IPVCD
                   PW2V(4,L) = 3
                   MAXPW2V = L
                ENDIF
@@ -609,7 +609,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1408) STNID,NINT(TYP),YOB,XOB,PW3Q
                ELSE
                   PW3V(1,L) = PW3O
                   PW3V(2,L) = 9
-                  PW3V(3,L) = PVCD
+                  PW3V(3,L) = IPVCD
                   PW3V(4,L) = 3
                   MAXPW3V = L
                ENDIF
@@ -644,7 +644,7 @@ CDAKCDAKCDAKCDAK  WRITE(IUNITS,1409) STNID,NINT(TYP),YOB,XOB,PW4Q
                ELSE
                   PW4V(1,L) = PW4O
                   PW4V(2,L) = 9
-                  PW4V(3,L) = PVCD
+                  PW4V(3,L) = IPVCD
                   PW4V(4,L) = 3
                   MAXPW4V = L
                ENDIF

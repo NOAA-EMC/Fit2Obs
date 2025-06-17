@@ -136,7 +136,10 @@ C$$$
       PRINT 700
   700 FORMAT(/'  =====> WELCOME TO PREVENTS PROGRAM -- LAST UPDATED ',
      $ '2001-10-10'/)
-      print*,'num threads=',ncpus()
+      !TODO: ncpus is undefined.  If this is an open_mp function,
+      !      then omp_get_num_procs() should be used.  For MPI,
+      !      simply print nprc from the mpi_comm_size call above.
+      !print*,'num threads=',ncpus()
       call prttime('start')
       endif
 
