@@ -13,7 +13,7 @@ local netcdf_fortran_ver=os.getenv("netcdf_fortran_ver") or "4.6.1"
 local bufr_ver=os.getenv("bufr_ver") or "12.1.0"
 local bacio_ver=os.getenv("bacio_ver") or "2.4.1"
 local w3emc_ver=os.getenv("w3emc_ver") or "2.10.0"
-local sp_ver=os.getenv("ip_ver") or "5.1.0"
+local ip_ver=os.getenv("ip_ver") or "5.1.0"
 local sigio_ver=os.getenv("sigio_ver") or "2.3.3"
 local sfcio_ver=os.getenv("sfcio_ver") or "1.4.2"
 local nemsio_ver=os.getenv("nemsio_ver") or "2.5.4"
@@ -29,7 +29,7 @@ load(pathJoin("netcdf-fortran", netcdf_fortran_ver))
 load(pathJoin("bufr", bufr_ver))
 load(pathJoin("bacio", bacio_ver))
 load(pathJoin("w3emc", w3emc_ver))
-load(pathJoin("ip", sp_ver))
+load(pathJoin("ip", ip_ver))
 load(pathJoin("sigio", sigio_ver))
 load(pathJoin("sfcio", sfcio_ver))
 load(pathJoin("nemsio", nemsio_ver))
