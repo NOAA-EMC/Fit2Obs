@@ -1,5 +1,5 @@
 help([[
-Build environment for fit2obs on Hera
+Build environment for fit2obs on Ursa
 ]])
 
 prepend_path("MODULEPATH", "/contrib/spack-stack/spack-stack-1.9.1/envs/ue-oneapi-2024.2.1/install/modulefiles/Core")
@@ -12,4 +12,4 @@ load(pathJoin("stack-intel-oneapi-mpi", stack_intel_oneapi_mpi_ver))
 
 load("fit2obs_common")
 
-whatis("Description: fit2obs environment on Hera with Intel Compilers")
+whatis("Description: fit2obs environment on Ursa with Intel Compilers")
