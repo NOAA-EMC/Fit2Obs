@@ -12,4 +12,8 @@ load(pathJoin("stack-intel-oneapi-mpi", stack_intel_oneapi_mpi_ver))
 
 load("fit2obs_common")
 
+setenv("CC","mpiicc")
+setenv("CXX","mpiicpc")
+setenv("FC","mpiifort")
+
 whatis("Description: fit2obs environment on Orion with Intel Compilers")

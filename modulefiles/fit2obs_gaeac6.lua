@@ -12,4 +12,8 @@ load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
 
 load("fit2obs_common")
 
+setenv("CC","cc")
+setenv("CXX","CC")
+setenv("FC","ftn")
+
 whatis("Description: fit2obs environment on Gaea with Intel Compilers")
