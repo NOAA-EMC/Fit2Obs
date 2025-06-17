@@ -5,7 +5,7 @@ file(STRINGS "VERSION" pVersion)
 
 project(fit2obs
         VERSION ${pVersion}
-        LANGUAGES Fortran)
+        LANGUAGES Fortran C)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_DIRECTORY_LABELS ${PROJECT_NAME})
