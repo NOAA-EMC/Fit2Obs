@@ -4,7 +4,7 @@ export spack_stack_ver=1.9.2
 export stack_oneapi_ver=2024.2.1
 export stack_intel_oneapi_mpi_ver=2021.13
 
-export cmake_ver=3.30.2
+export cmake_ver=3.27.9
 export jasper_ver=2.0.32
 export zlib_ver=1.2.13
 export libpng_ver=1.6.37
