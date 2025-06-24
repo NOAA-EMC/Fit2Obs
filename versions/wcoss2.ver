@@ -1,6 +1,6 @@
 export cmake_ver=3.20.2
 export jasper_ver=2.0.25
-export zlib_ver=1.2.13
+export zlib_ver=1.2.11
 export libpng_ver=1.6.37
 
 export bufr_ver=12.1.0
