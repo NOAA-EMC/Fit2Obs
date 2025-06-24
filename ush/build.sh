@@ -16,12 +16,14 @@ MODULEFILE_INSTALL_PREFIX=${MODULEFILE_INSTALL_PREFIX:-"${INSTALL_PREFIX}/module
 #==============================================================================#
 
 # Detect machine (sets MACHINE_ID)
-source $DIR_ROOT/ush/detect_machine.sh
+source ${DIR_ROOT}/ush/detect_machine.sh
 
 # Load modules
-source $DIR_ROOT/ush/module-setup.sh
-module use $DIR_ROOT/modulefiles
-module load fit2obs_$MACHINE_ID
+source ${DIR_ROOT}/ush/module-setup.sh
+source ${DIR_ROOT}/versions/spack.ver
+source ${DIR_ROOT}/versions/${MACHINE_ID}.ver
+module use ${DIR_ROOT}/modulefiles
+module load fit2obs_${MACHINE_ID}
 module list
 
 # Collect BUILD Options
