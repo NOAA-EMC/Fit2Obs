@@ -1,5 +1,5 @@
 help([[
-Build environment for fit2obs on Hercules
+Build environment for fit2obs on Ursa
 ]])
 
 prepend_path("MODULEPATH", os.getenv("spack_stack_mod_path"))
@@ -16,4 +16,4 @@ setenv("CC","mpiicc")
 setenv("CXX","mpiicpc")
 setenv("FC","mpiifort")
 
-whatis("Description: fit2obs environment on Hercules with Intel Compilers")
+whatis("Description: fit2obs environment on Ursa with Intel Compilers")

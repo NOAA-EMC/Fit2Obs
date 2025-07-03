@@ -5,6 +5,7 @@ C***********************************************************************
       USE GBLEVN_MODULE
       USE SIGIO_MODULE
       USE SIGIO_R_MODULE
+      USE SP_MOD, ONLY: SPTEZM, SPTEZMV
 
       IMPLICIT NONE
       INTEGER IUNITF(2), IDATEP, IM, JM, KBAK 

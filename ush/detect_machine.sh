@@ -14,6 +14,8 @@ case $(hostname -f) in
   gaea6[1-8])          MACHINE_ID=gaeac6 ;; ### gaea61-68
   gaea6[1-8].ncrc.gov) MACHINE_ID=gaeac6 ;; ### gaea61-68
 
+  ufe0[1-4]) MACHINE_ID=ursa ;; ### ursa
+
   hfe0[1-9]) MACHINE_ID=hera ;; ### hera01-9
   hfe1[0-2]) MACHINE_ID=hera ;; ### hera10-12
   hecflow01) MACHINE_ID=hera ;; ### heraecflow01

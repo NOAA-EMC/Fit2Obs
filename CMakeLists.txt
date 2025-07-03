@@ -5,7 +5,7 @@ file(STRINGS "VERSION" pVersion)
 
 project(fit2obs
         VERSION ${pVersion}
-        LANGUAGES Fortran)
+        LANGUAGES Fortran C)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_DIRECTORY_LABELS ${PROJECT_NAME})
@@ -39,7 +39,7 @@ endif()
 # NCEPLibs dependencies.
 find_package(bacio REQUIRED)
 find_package(w3emc REQUIRED)
-find_package(sp REQUIRED)
+find_package(ip REQUIRED)
 find_package(sfcio REQUIRED)
 find_package(sigio REQUIRED)
 find_package(nemsio REQUIRED)
