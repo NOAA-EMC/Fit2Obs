@@ -12,7 +12,9 @@ local jasper_ver=os.getenv("jasper_ver") or "2.0.25"
 local zlib_ver=os.getenv("zlib_ver") or "1.2.11"
 local libpng_ver=os.getenv("libpng_ver") or "1.6.37"
 
-local netcdf_ver=os.getenv("netcdf_ver") or "4.7.4"
+local hdf5_ver=os.getenv("hdf5_ver") or "1.14.0"
+local pnetcdf_ver=os.getenv("pnetcdf_ver") or "1.12.2"
+local netcdf_ver=os.getenv("netcdf_ver") or "4.9.2"
 
 local bufr_ver=os.getenv("bufr_ver") or "12.1.0"
 local bacio_ver=os.getenv("bacio_ver") or "2.4.1"
@@ -32,19 +34,14 @@ load(pathJoin("jasper", jasper_ver))
 load(pathJoin("zlib", zlib_ver))
 load(pathJoin("libpng", libpng_ver))
 
-load(pathJoin("netcdf", netcdf_ver))
+load(pathJoin("hdf5-D", hdf5_ver))
+load(pathJoin("pnetcdf-D", pnetcdf_ver))
+load(pathJoin("netcdf-D", netcdf_ver))
 
 load(pathJoin("bufr", bufr_ver))
 load(pathJoin("bacio", bacio_ver))
 load(pathJoin("w3emc", w3emc_ver))
---TODO when the module becomes available, load it
---load(pathJoin("ip", ip_ver))
-pushenv("ip_ROOT", pathJoin("/apps/ops/para/libs/intel/19.1.3.304/ip", ip_ver))
-pushenv("IP_INC4", pathJoin("/apps/ops/para/libs/intel/19.1.3.304/ip", ip_ver, "include_4"))
-pushenv("IP_INCd", pathJoin("/apps/ops/para/libs/intel/19.1.3.304/ip", ip_ver, "include_d"))
-pushenv("IP_LIB4", pathJoin("/apps/ops/para/libs/intel/19.1.3.304/ip", ip_ver, "lib64/libip_4.a"))
-pushenv("IP_LIBd", pathJoin("/apps/ops/para/libs/intel/19.1.3.304/ip", ip_ver, "lib64/libip_d.a"))
-pushenv("ip_VERSION", ip_ver)
+load(pathJoin("ip", ip_ver))
 load(pathJoin("sigio", sigio_ver))
 load(pathJoin("sfcio", sfcio_ver))
 load(pathJoin("nemsio", nemsio_ver))
