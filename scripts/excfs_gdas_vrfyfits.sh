@@ -59,8 +59,8 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   export PRPI=$COMIN_OBS/gdas.t${hh}z.prepbufr
   export PRPO=$COMOUT_FITX/gdas.t${hh}z.prepqa
   export PRPF=$COMOUT_FITX/gdas.t${hh}z.prepqf
-  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.$suffix
-  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.$suffix
+  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.i006.$suffix
+  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.i006.$suffix
   export CNVS=$COMIN_ANALYSIS/gdas.t${hh}z.cnvstat.tar
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   tzz=t${hh}z
