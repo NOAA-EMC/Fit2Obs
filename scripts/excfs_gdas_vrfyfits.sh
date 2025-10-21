@@ -59,8 +59,8 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   export PRPI=$COMIN_OBS/gdas.t${hh}z.prepbufr
   export PRPO=$COMOUT_FITX/gdas.t${hh}z.prepqa
   export PRPF=$COMOUT_FITX/gdas.t${hh}z.prepqf
-  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.i006.$suffix
-  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.i006.$suffix
+  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.a006.$suffix
+  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.a006.$suffix
   export CNVS=$COMIN_ANALYSIS/gdas.t${hh}z.cnvstat.tar
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   tzz=t${hh}z
@@ -124,12 +124,12 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fh00=$fh;            [ $fh00 -lt 10 ] && fh00=0$fh00; [ $fh00 -lt 100 ] && fh00=0$fh00
   tzz=t$(echo $FDATE|cut -c9-10)z
   [[ $OUTPUT_FILETYPE = nemsio ]] && suffix=nemsio || suffix=nc
-  export sig1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
-  export sig2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
-  export sig3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
-  export sfc1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
-  export sfc2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
-  export sfc3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
+  export sig1=$COMIN_HISTORY/gfs.$tzz.atm.f$fhm3.$suffix
+  export sig2=$COMIN_HISTORY/gfs.$tzz.atm.f$fh00.$suffix
+  export sig3=$COMIN_HISTORY/gfs.$tzz.atm.f$fhp3.$suffix
+  export sfc1=$COMIN_HISTORY/gfs.$tzz.atm.f$fhm3.$suffix
+  export sfc2=$COMIN_HISTORY/gfs.$tzz.atm.f$fh00.$suffix
+  export sfc3=$COMIN_HISTORY/gfs.$tzz.atm.f$fhp3.$suffix
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   CDAM3=$($NDATE -$tspan  $CDATE)
   CDAP3=$($NDATE +$tspan  $CDATE)
