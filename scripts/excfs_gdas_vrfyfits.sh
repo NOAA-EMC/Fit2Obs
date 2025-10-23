@@ -24,7 +24,7 @@ export FITSSH=${FITSSH:-$USHcfs/${cfsd}fits.sh}
 export HORZSH=${HORZSH:-$USHcfs/${cfsd}horizn.sh}
 export CNVDIAGEXEC=${CNVDIAGEXEC:-$EXECcfs/${cfsp}post_convdiag.x}
 export COMOUT_FITX=${COMOUT_FITX:-$DATA}
-export COMOUT=${COMOUT:-$DATA}   
+export COMOUT=${COMOUT:-$DATA}
 export SAVEPREP=${SAVEPREP:-NO}
 
 ##[ $NEMS = YES ] && { sig=gfn; sfc=sfn; } || { sig=sig; sfc=sfc; }
@@ -59,9 +59,9 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   export PRPI=$COMIN_OBS/gdas.t${hh}z.prepbufr
   export PRPO=$COMOUT_FITX/gdas.t${hh}z.prepqa
   export PRPF=$COMOUT_FITX/gdas.t${hh}z.prepqf
-  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.atmanl.$suffix
-  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.atmanl.$suffix
-  export CNVS=$COMIN_ANALYSIS/gdas.t${hh}z.cnvstat
+  export sig1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.a006.$suffix
+  export sfc1=$COMIN_ANALYSIS/gdas.t${hh}z.analysis.atm.a006.$suffix
+  export CNVS=$COMIN_ANALYSIS/gdas.t${hh}z.cnvstat.tar
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   tzz=t${hh}z
   export PRPI=$COMIN_OBS/cdas1.$tzz.prepbufr
@@ -70,7 +70,7 @@ elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   export sig1=$COMIN_ANALYSIS/cdas1.$tzz.sanl
   export sfc1=$COMIN_ANALYSIS/cdas1.$tzz.sfcanl
   export CNVS=$COMIN_ANALYSIS/cdas1.$tzz.cnvstat
-else 
+else
   echo $OUTPUT_FILETYPE = unknown OUTPUT_FILETYPE; exit 999
 fi
 
@@ -105,10 +105,10 @@ fi
 
 tspan=6
 
-for fp in $fp1 $fp2 $fp3 $fp4 $fp5 
+for fp in $fp1 $fp2 $fp3 $fp4 $fp5
 do
 eval $fp
-for fh in $fh1 $fh2                 
+for fh in $fh1 $fh2
 do
 
 [ $fh = xx ] && continue
@@ -124,12 +124,12 @@ if [[ $OUTPUT_FILETYPE = nemsio || $OUTPUT_FILETYPE = netcdf ]] ; then
   fh00=$fh;            [ $fh00 -lt 10 ] && fh00=0$fh00; [ $fh00 -lt 100 ] && fh00=0$fh00
   tzz=t$(echo $FDATE|cut -c9-10)z
   [[ $OUTPUT_FILETYPE = nemsio ]] && suffix=nemsio || suffix=nc
-  export sig1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
-  export sig2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
-  export sig3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
-  export sfc1=$COMIN_HISTORY/gfs.$tzz.atmf$fhm3.$suffix
-  export sfc2=$COMIN_HISTORY/gfs.$tzz.atmf$fh00.$suffix
-  export sfc3=$COMIN_HISTORY/gfs.$tzz.atmf$fhp3.$suffix
+  export sig1=$COMIN_HISTORY/gfs.$tzz.atm.f$fhm3.$suffix
+  export sig2=$COMIN_HISTORY/gfs.$tzz.atm.f$fh00.$suffix
+  export sig3=$COMIN_HISTORY/gfs.$tzz.atm.f$fhp3.$suffix
+  export sfc1=$COMIN_HISTORY/gfs.$tzz.atm.f$fhm3.$suffix
+  export sfc2=$COMIN_HISTORY/gfs.$tzz.atm.f$fh00.$suffix
+  export sfc3=$COMIN_HISTORY/gfs.$tzz.atm.f$fhp3.$suffix
 elif [[ $OUTPUT_FILETYPE = cfs ]]; then
   CDAM3=$($NDATE -$tspan  $CDATE)
   CDAP3=$($NDATE +$tspan  $CDATE)
@@ -143,11 +143,11 @@ else
   echo $OUTPUT_FILETYPE = unknown OUTPUT_FILETYPE; exit 999
 fi
 
-if [ -s $sig1 -a -s $sig2 -a -s $sig3 ] ; then 
+if [ -s $sig1 -a -s $sig2 -a -s $sig3 ] ; then
  [ -s $sfc1 -a -s $sfc2 -a -s $sfc3 ] && rsfc=t || rsfc=f
  [ $fh = $fh1 ] && echo  "&PREVDATA dofcst=t,nbax=3,span=$tspan,fits=t,rsfc=$rsfc /" >$PREC
  [ $fh = $fh2 ] && echo  "&PREVDATA doanls=t,nbax=3,span=$tspan,fits=t,rsfc=$rsfc /" >$PREC
- cp $PRPF prepqm; $SIGEVENTSH prepqm $CDATE; cp prepqm $PRPF 
+ cp $PRPF prepqm; $SIGEVENTSH prepqm $CDATE; cp prepqm $PRPF
 else
  [ $fh = $fh1 ] && fh1=xx
  [ $fh = $fh2 ] && fh2=xx
@@ -182,7 +182,7 @@ cp $COMOUT_FITX/f*.sfc.$CDATE   $FIT_DIR
 
 for typ in anl fcs
 do
-mkdir -p $HORZ_DIR/$typ   
+mkdir -p $HORZ_DIR/$typ
 cp -p $COMOUT_FITX/adpupa.mand.$typ.$CDATE  $HORZ_DIR/$typ/adpupa.mand.$CDATE
 cp -p $COMOUT_FITX/adpsfc.$typ.$CDATE       $HORZ_DIR/$typ/adpsfc.$CDATE
 cp -p $COMOUT_FITX/sfcshp.$typ.$CDATE       $HORZ_DIR/$typ/sfcshp.$CDATE
